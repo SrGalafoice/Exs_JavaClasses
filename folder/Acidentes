@@ -1,0 +1,147 @@
+package Estatistica;
+
+public class Estatistica {                //objetos
+    String Ncidades;
+    int Ccidade;
+    int Qacidentes;
+
+    public Estatistica() {
+    }
+
+    public Estatistica(String NomeCidades, int CodCidade, int QtdAcidentes) {
+        this.Ccidade = CodCidade;
+        this.Ncidades = NomeCidades;
+        this.Qacidentes = QtdAcidentes;
+    }
+
+  //  public String toString() {
+    //    return "Estatistica{" +
+      //          "Nome da cidade='" + Ncidades + '\'' +
+        //        ", Codigo da cidade=" + Ccidade +
+          //      ", Quantidade de acidentes=" + Qacidentes +
+            //    '}';
+    // }
+}
+
+
+
+
+
+
+package Estatistica;
+
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+
+import static Estatistica.ClasseMetodos.*;
+
+public class ClassePrincipal {
+    public static void main(String[] args) {
+        Scanner leia = new Scanner(System.in);
+        int x = 0;
+        while (x != 9){
+        System.out.println("---------------------------------------------------------------");
+        System.out.println("|\tMENU ESTATÍSTICA\t               \t|");
+        System.out.println("| Estatísticas de acidentes em 2020\t\t|");
+        System.out.println("| 1 - Cadastro Estatística\t\t\t|");
+        System.out.println("| 2 - Consulta por quantidade de acidentes\t|");
+        System.out.println("| 3 - Consulta por estatísticas de acidentes\t|");
+        System.out.println("| 4 - Acidentes acima da média das 10 cidades   |");
+        System.out.println("| 9 - Finaliza \t\t   \t\t              |");
+        System.out.println("----------------------------------------------------------------");
+        System.out.println("\nQual opcao voce deseja escolher? ");
+        x = leia.nextInt();
+            switch (x) {
+                case 1 -> FCADASTRAESTATISTICA();
+                case 2 -> PQTDACIDENTES();
+                case 3 -> PMAIORMENOR();
+                case 4 -> PACIMA();
+                case 9 -> System.out.println("FINALIZADO");
+            }
+
+        }
+  //      for (Estatistica lulu : Est){
+        //        System.out.println(lulu);
+     //   }
+    }
+}
+
+
+
+
+
+
+
+package Estatistica;
+
+import java.util.Scanner;
+
+public class ClasseMetodos {
+    static Scanner leia = new Scanner(System.in);
+    static Estatistica[] Est = new Estatistica[5];
+    static int Acidentes, y = 0;
+    public static void FCADASTRAESTATISTICA(){
+        for (int i = 0; i < Est.length; i++){
+            Est[i] = new Estatistica();
+
+            System.out.println("Digite o codigo da cidade ");
+            Est[i].Ccidade = leia.nextInt();
+
+            leia.nextLine();
+            System.out.println("Nome da cidade ");
+            Est[i].Ncidades = leia.nextLine();
+
+            System.out.println("Quantidade de acidentes ");
+            Est[i].Qacidentes = leia.nextInt();
+
+            y = 1;
+        }
+        return;
+
+    }
+    public static void PQTDACIDENTES(){
+        if (y == 0){
+        System.out.println("OPCAO INVALIDA NO MOMENTO ");
+        } else{
+        for (int i = 0; i < Est.length; i++){
+            if (Est[i].Qacidentes > 100 && Est[i].Qacidentes < 500){
+                Acidentes +=1;
+            }
+        }
+        System.out.println("Quantidade de acidentes maior que 100 e menor que 500 = " + Acidentes);
+    }
+    }
+    public static void PMAIORMENOR(){
+        if (y == 0){
+            System.out.println("OPCAO INVALIDA NO MOMENTO ");
+        } else{
+        int maior = 0,menor = Est[1].Qacidentes;
+        for (int i = 0; i < Est.length; i++){
+            if (Est[i].Qacidentes > maior){
+                maior = Est[i].Qacidentes;
+            } else if (Est[i].Qacidentes < menor){
+                menor = Est[i].Qacidentes;
+            }
+        }
+        System.out.println("Maior quantidade = " + maior + ", menor =" + menor);
+    }
+    }
+public static void PACIMA(){
+    if (y == 0){
+        System.out.println("OPCAO INVALIDA NO MOMENTO ");
+    } else{
+        double soma = 0,media;
+        for (int i = 0; i < Est.length; i++){
+            soma = soma + Est[i].Qacidentes;
+        }
+        media = soma / 5;
+    for (int i = 0; i < Est.length; i++){
+        if (Est[i].Qacidentes > media){
+            System.out.println("Cidade: " + Est[i].Ncidades + " está com a quantidade de acidentes acima da mediakkkkk ");
+        }
+    }
+}
+}
+}
+
